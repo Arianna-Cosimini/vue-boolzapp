@@ -27,23 +27,77 @@
 
         <div class="large-container">
             <div id="top-bar"></div>
-            <div class="small-container d-flex border border-black">
-                <div class="small-column border border-black w-50">
 
+            <div class="small-container d-flex border border-black">
+
+                <div class="small-column border border-black w-50 pb-5">
                     <div id="user-send" class="d-flex justify-content-between align-items-center p-2 ">
-                        <div class="img-user-send">
-                            <img src="./img/avatar_6.jpg" alt="">
+                        <div id="avatar-user-send" class="d-flex align-items-center gap-2 fw-semibold">
+
+                            <div class="img-user-send">
+                                <img src="./img/avatar_6.jpg" alt="">
+                            </div>
+
+                            <div class="name-user-send">
+                                <span>Arianna</span>
+                            </div>
+
                         </div>
 
                         <div id="icon-user-send" class="d-flex gap-3 me-2">
                             <i class="fa-solid fa-circle-notch"></i>
                             <i class="fa-solid fa-message"></i>
                             <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <div id="new-messages">
+                        <div id="new-messages-silence" class="d-flex align-items-center gap-2">
+                            <div class="new-messages-icon d-flex align-items-center justify-content-center">
+                                <i class="fa-solid fa-bell-slash"></i>
+                            </div>
+
+                            <div class="new-messages-text d-flex flex-column">
+                                <span class="fw-semibold">Ricevi notifiche di nuovi messaggi</span>
+                                <span>Attiva notifiche di desktop</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2 ">
+                        <div class="input-group align-items-center border">
+                            <label class="active px-4 " for="input-group-2"><i
+                                    class="fa-solid fa-magnifying-glass"></i></label>
+                            <input type="text" class="form-control border-0 border-start" id="input-group-2"
+                                name="input-group-2" placeholder="Cerca o inizia una nuova chat">
+                        </div>
+                    </div>
+
+
+                        <div v-for="currentName in contacts" id="user-message" class="d-flex justify-content-between px-3 py-1">
+                            <div class="img-user d-flex gap-3">
+                                <img :src="currentName.avatar" alt="">
+                                <div id="text-user" class="d-flex flex-column">
+                                    <span class="name">{{currentName.name}} </span>
+                                    <span class="last-send">Ultimo messaggio inviato</span>
+                                </div>
+                            </div>
+                            <div id="date">
+                                <div class="hour-last-send text-center">
+                                    {{ currentName.messages.length > 0 ? currentName.messages[currentName.messages.length -1].hour : '' }}
+                                </div>
+
+                                <div class="date-last-message">
+                                    {{ currentName.messages.length > 0 ? currentName.messages[currentName.messages.length -1].date : '' }}
+                                </div>
+
+                            </div>
 
                         </div>
-
-                    </div>
                 </div>
+
+
+
                 <div class="large-column border border-black w-75">
                     <div id="user-received"></div>
                 </div>
