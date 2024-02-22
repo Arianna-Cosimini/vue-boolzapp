@@ -132,11 +132,19 @@
                         </div>
                     </div>
 
-                    <div v-if="activeMessageIndex !== null" class="message-list d-flex">
-                        <div v-for="message in contacts[activeMessageIndex].messages" class="message">
-                            <div v-if="message.status === 'sent' ">
-                                <p>{{ message.message }}</p>
-                                <p>{{ message.date }} </p>
+                    <div v-if="activeMessageIndex !== null" class="message-list">
+                        <div v-for="message in contacts[activeMessageIndex].messages" class="message d-flex justify-content-end">
+                            <button v-if="message.status === 'sent' " class="text-end rounded border-0 p-1 mb-4" 
+                            :class="message.status === 'sent' ? 'sent' : '' ">
+                                {{ message.message }}
+                               
+                            </button>
+
+                            <div v-else >
+                                <button class="rounded border-0 p-1"
+                                :class="message.status === 'received' ? 'received' : '' "
+                                >
+                                {{ message.message }}</button>
                             </div>
                             
                             

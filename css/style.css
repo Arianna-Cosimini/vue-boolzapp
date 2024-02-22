@@ -89,4 +89,12 @@ img{
     background-image:url("../img/mine.jpg");
 }
 
+.sent{
+    background-color: green;
+}
+
+.received{
+    align-self: flex-start;
+}
+
 
