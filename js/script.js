@@ -5,6 +5,7 @@ createApp({
         return {
 
             activeMessageIndex: 0,
+            newElement:"",
 
             contacts: [
                 {
@@ -202,6 +203,30 @@ createApp({
         changeMessage(index) {
             console.log(index)
             this.activeMessageIndex = index
+        },
+
+        addElement() {
+            // Controllo per verificare se il campo di input è vuoto
+            if (this.newElement.trim() === "") {
+                return;
+            }
+        
+            // Aggiungi il testo scritto nel campo di input al messaggio del contatto attivo
+            if (this.activeMessageIndex !== null) { // Controlla se è stato selezionato un contatto
+
+                let now = new Date()
+                let hour = now.getHours()
+                let minutes = now.getMinutes()
+
+                this.contacts[this.activeMessageIndex].messages.push({
+                    message: this.newElement,
+                    status: 'sent',
+                    hour: `${hour}:${minutes}`,
+                });
+            }
+        
+            // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
+            this.newElement = "";
         },
     }
 }).mount('#app');
