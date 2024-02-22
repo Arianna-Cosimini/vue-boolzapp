@@ -90,11 +90,29 @@ img{
 }
 
 .sent{
+    position: relative;
     background-color: green;
+    padding: 4px 50px 4px 8px;
+    margin-bottom: 15px;
+}
+
+.text-message{
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.hour-message{
+    position: absolute;
+    bottom: 0;
+    right: 8px;
+
+    font-size: 12px;
 }
 
 .received{
-    align-self: flex-start;
+    position: relative;
+    padding: 4px 50px 4px 8px;
+    margin-bottom: 15px;
 }
 
 
