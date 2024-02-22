@@ -4,8 +4,9 @@
     box-sizing: border-box;
 }
 
-.small-container{}
-
+.my-style-input{
+    background-color: #eaeaea;
+}
 
 #top-bar{
     width: 100%;
@@ -25,11 +26,12 @@ img{
     border-radius: 50%;
 }
 
-#user-send{
+#user-send,
+#user-received{
     background-color: #eaeaea;
 }
 
-#icon-user-send .fa-solid{
+.fa-solid{
     font-size: 25px;
     color: #b1b1b1;
 }
@@ -65,12 +67,22 @@ img{
 
 }
 
+#user-message:hover{
+    background-color: #e9ebeb;
+}
+
 #text-user{
     line-height: 20px;
 }
 
 #text-user > span:nth-child(2):not(.name){
-    color: #547c8e;
+    color: #c2c5c6;
     font-size: 12px;
     font-weight:500;
 }
+
+.large-column{
+    background-image:url("../img/mine.jpg");
+}
+
+

@@ -28,9 +28,9 @@
         <div class="large-container">
             <div id="top-bar"></div>
 
-            <div class="small-container d-flex border border-black">
+            <div class="small-container d-flex">
 
-                <div class="small-column border border-black w-50 pb-5">
+                <div class="small-column w-50 pb-5">
                     <div id="user-send" class="d-flex justify-content-between align-items-center p-2 ">
                         <div id="avatar-user-send" class="d-flex align-items-center gap-2 fw-semibold">
 
@@ -74,7 +74,7 @@
                     </div>
 
 
-                        <div v-for="currentName in contacts" id="user-message" class="d-flex justify-content-between px-3 py-1">
+                        <div v-for="currentName in contacts" id="user-message" class="d-flex justify-content-between px-3 py-1 border-top">
                             <div class="img-user d-flex gap-3">
                                 <img :src="currentName.avatar" alt="">
                                 <div id="text-user" class="d-flex flex-column">
@@ -98,8 +98,37 @@
 
 
 
-                <div class="large-column border border-black w-75">
-                    <div id="user-received"></div>
+                <div class="large-column position-relative w-75">
+                    <div id="user-received" class="d-flex justify-content-between align-items-center p-2 ">
+                        <div id="avatar-user-received" class="d-flex align-items-center gap-2 fw-semibold">
+
+                            <div class="img-user-received">
+                                <img src="./img/avatar_6.jpg" alt="">
+                            </div>
+
+                            <div class="name-user-received">
+                                <span>Arianna</span>
+                            </div>
+
+                        </div>
+
+                        <div id="icon-user-received" class="d-flex gap-3 me-2">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group position-absolute start-0 bottom-0 w-100">
+                        <div class="input-group align-items-center border my-style-input p-2">
+                            <label class="active px-4 " for="input-group-2"><i
+                                    class="fa-solid fa-magnifying-glass"></i></label>
+                            <input type="text" class="form-control border-0 border-start rounded" id="input-group-2"
+                                name="input-group-2" placeholder="Scrivi un messaggio">
+                                <i class="fa-solid fa-microphone px-4"></i>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
