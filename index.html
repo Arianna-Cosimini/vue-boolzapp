@@ -134,8 +134,12 @@
 
                     <div v-if="activeMessageIndex !== null" class="message-list d-flex">
                         <div v-for="message in contacts[activeMessageIndex].messages" class="message">
-                            <p>{{ message.date }} </p>
-                            <p>{{ message.message }}</p>
+                            <div v-if="message.status === 'sent' ">
+                                <p>{{ message.message }}</p>
+                                <p>{{ message.date }} </p>
+                            </div>
+                            
+                            
                         </div>
                     </div>
 
