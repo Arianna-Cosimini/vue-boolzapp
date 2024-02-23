@@ -24,9 +24,10 @@
 <body>
 
     <div id="app">
-
+       
+        
         <div class="large-container">
-
+            
             <div id="top-bar"></div>
 
             <div class="small-container d-flex">
@@ -76,18 +77,12 @@
                         <div class="input-group align-items-center border">
                             <label class="active px-4 " for="input-group-2"><i
                                     class="fa-solid fa-magnifying-glass"></i></label>
-                            
+
                             <!-- Inserito evento di input per richiamare la funzione
                             filterWords -->
-                            <input 
-                                @input="filterWords()" 
-                                v-model="searchWord"
-                                type="text" 
-                                class="form-control border-0 border-start" 
-                                id="input-group-2"
-                                name="input-group-2" 
-                                placeholder="Cerca o inizia una nuova chat"
-                            >
+                            <input @input="filterWords()" v-model="searchWord" type="text"
+                                class="form-control border-0 border-start" id="input-group-2" name="input-group-2"
+                                placeholder="Cerca o inizia una nuova chat">
                         </div>
                     </div>
                     <!-- Fine input cerca o inizia nuova chat -->
@@ -164,13 +159,28 @@
                                 se lo status è sent allora stampo i messaggi con quello status -->
                                 <div v-if="message.status === 'sent' " class="d-flex justify-content-end">
 
-                                    <button class=" rounded border-0"
-                                        :class="message.status === 'sent' ? 'sent' : '' ">
-                                        <span class="text-message">{{ message.message }}</span>
+                                    <div class="dropdown">
+                                        <button class="rounded border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="message.status === 'sent' ? 'sent' : '' ">
+                                            <span class="text-message">{{ message.message }}</span>
 
-                                        <span class="hour-message">{{message.hour}} </span>
+                                            <span class="hour-message">{{message.hour}} </span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                          <li><a class="dropdown-item" href="#">Action</a></li>
+                                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                      </div>
+                                     
+                                        <!-- <button class=" rounded border-0" 
+                                            :class="message.status === 'sent' ? 'sent' : '' ">
+                                            <span class="text-message">{{ message.message }}</span>
 
-                                    </button>
+                                            <span class="hour-message">{{message.hour}} </span>
+
+                                        </button> -->
+                                        
+                                   
                                 </div>
                                 <!--fine condizione per stampare i messaggi con status sent (inviati) -->
 
@@ -194,13 +204,9 @@
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </label>
 
-                                        <input 
-                                            v-model="newElement" 
-                                            type="text"
-                                            class="form-control border-0 border-start rounded" 
-                                            id="input-group-2"
-                                            name="input-group-2" 
-                                            placeholder="Scrivi un messaggio"
+                                        <input v-model="newElement" type="text"
+                                            class="form-control border-0 border-start rounded" id="input-group-2"
+                                            name="input-group-2" placeholder="Scrivi un messaggio"
                                             @keydown.enter.prevent="addElement">
 
                                         <i class="fa-solid fa-microphone px-4"></i>
@@ -221,6 +227,7 @@
         </div>
 
 
+
     </div>
 
 
@@ -228,6 +235,7 @@
 
 
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <script src='https://unpkg.com/vue@3'></script>
