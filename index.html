@@ -26,17 +26,20 @@
     <div id="app">
 
         <div class="large-container">
-           
+
             <div id="top-bar"></div>
 
             <div class="small-container d-flex">
 
+                <!-- colonna con contatti e messaggi ricevuti -->
                 <div class="small-column w-50 pb-5 bg-white">
+
+                    <!-- Top bar colonna con messaggi ricevuti -->
                     <div id="user-send" class="d-flex justify-content-between align-items-center p-2 ">
                         <div id="avatar-user-send" class="d-flex align-items-center gap-2 fw-semibold">
-                            
+
                             <div class="img-user-send">
-                                <img src="./img/avatar_6.jpg" alt="">
+                                <img class="user-picture" src="./img/avatar_6.jpg" alt="">
                             </div>
 
                             <div class="name-user-send">
@@ -51,7 +54,9 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
+                    <!-- Fine top bar colonna con messaggi ricevuti -->
 
+                    <!-- Inizio div attivare notifiche-->
                     <div id="new-messages">
                         <div id="new-messages-silence" class="d-flex align-items-center gap-2">
                             <div class="new-messages-icon d-flex align-items-center justify-content-center">
@@ -60,11 +65,13 @@
 
                             <div class="new-messages-text d-flex flex-column">
                                 <span class="fw-semibold">Ricevi notifiche di nuovi messaggi</span>
-                                <span>Attiva notifiche desktop</span>
+                                <a href="#">Attiva notifiche desktop</a>
                             </div>
                         </div>
                     </div>
+                    <!-- Fine div attivare notifiche-->
 
+                    <!-- Inizio input cerca o inizia nuova chat -->
                     <div class="form-group p-2 ">
                         <div class="input-group align-items-center border">
                             <label class="active px-4 " for="input-group-2"><i
@@ -73,23 +80,27 @@
                                 name="input-group-2" placeholder="Cerca o inizia una nuova chat">
                         </div>
                     </div>
+                    <!-- Fine input cerca o inizia nuova chat -->
 
 
+                    <!-- Ciclo for per stampare la lista dei messaggi ricevuti -->
                     <div v-for="(currentName,index) in contacts" id="user-message"
                         class="d-flex justify-content-between px-3 py-1 border-top" @click="changeMessage(index)">
                         <div class="img-user d-flex gap-3">
-                            <img :src="currentName.avatar" alt="">
+                            <img class="user-picture" :src="currentName.avatar" alt="">
                             <div id="text-user" class="d-flex flex-column">
                                 <span class="name">{{currentName.name}} </span>
                                 <span class="last-send">Ultimo messaggio inviato</span>
                             </div>
                         </div>
                         <div id="date">
+
+                            <!-- Ho utulizzato operatore ternario per accedere alla proprietà hour  -->
                             <div class="hour-last-send text-center">
                                 {{ currentName.messages.length > 0 ? currentName.messages[currentName.messages.length
                                 -1].hour : '' }}
                             </div>
-
+                            <!-- Ho utulizzato operatore ternario per accedere alla proprietà date  -->
                             <div class="date-last-message">
                                 {{ currentName.messages.length > 0 ? currentName.messages[currentName.messages.length
                                 -1].date : '' }}
@@ -98,16 +109,22 @@
                         </div>
 
                     </div>
+                    <!-- Fine ciclo for per stampare la lista dei messaggi ricevuti -->
+
                 </div>
+                <!--Fine colonna con contatti e messaggi ricevuti -->
 
 
 
+                <!-- Inizio colonna con visualizzazione chat -->
                 <div class="large-column position-relative w-75">
+
+                    <!-- inizio topbar per colonna con visualizzazione chat -->
                     <div id="user-received" class="d-flex justify-content-between align-items-center p-2 ">
                         <div id="avatar-user-received" class="d-flex align-items-center gap-2 fw-semibold">
 
                             <div class="img-user-received">
-                                <img :src="contacts[activeMessageIndex].avatar" alt="">
+                                <img class="user-picture" :src="contacts[activeMessageIndex].avatar" alt="">
                             </div>
 
                             <div class="name-user-received">
@@ -122,66 +139,79 @@
                             <i class="fa-solid fa-ellipsis-vertical"></i>
                         </div>
                     </div>
+                    <!-- fine topbar per colonna con visualizzazione chat -->
 
-                    
+
+                    <!-- Inizio contenuto per le chat -->
                     <div id="message-panel" class="p-5 ">
-                        
-                        
+
+                        <!-- controllo per assicurarmi che la chat sia presente -->
                         <div v-if="activeMessageIndex !== null" class="message-list">
+                            <!-- ciclo for per stampare le chat -->
                             <div v-for="message in contacts[activeMessageIndex].messages" class="message">
-                                
+
+                                <!-- condizione per stampare i messaggi con status sent (inviati)
+                                se lo status è sent allora stampo i messaggi con quello status -->
                                 <div v-if="message.status === 'sent' " class="d-flex justify-content-end">
 
-                                    <button class="text-end rounded border-0"
-                                    :class="message.status === 'sent' ? 'sent' : '' ">
-                                    <span class="text-message">{{ message.message }}</span>
-                                    
-                                    <span class="hour-message">{{message.hour}} </span>
-                                    
-                                </button>
-                            </div>
+                                    <button class=" rounded border-0"
+                                        :class="message.status === 'sent' ? 'sent' : '' ">
+                                        <span class="text-message">{{ message.message }}</span>
 
-                            <div v-else>
-                                <button class="rounded border-0"
-                                :class="message.status === 'received' ? 'received' : '' "
-                                >
-                                <span class="text-message">{{ message.message }}</span>
-                                
-                                <span class="hour-message">{{message.hour}} </span>
-                                
-                            </button>
-                        </div>
-                        
-                        <div 
-                            @submit.prevent="addElement()"
-                            class="form-group position-absolute start-0 bottom-0 w-100"
-                         >
-                            <div class="input-group align-items-center border my-style-input p-2">
-                                <label class="active px-4 " for="input-group-2"><i
-                                        class="fa-solid fa-magnifying-glass"></i></label>
-                                <input 
-                                    v-model="newElement"
-                                    type="text" 
-                                    class="form-control border-0 border-start rounded" 
-                                    id="input-group-2"
-                                    name="input-group-2" 
-                                    placeholder="Scrivi un messaggio"
-                                    @keydown.enter.prevent="addElement"
-                                >
-                                <i class="fa-solid fa-microphone px-4"></i>
+                                        <span class="hour-message">{{message.hour}} </span>
+
+                                    </button>
+                                </div>
+                                <!--fine condizione per stampare i messaggi con status sent (inviati) -->
+
+                                <!-- altrimenti stampo i messaggi con status received (ricevuti) -->
+                                <div v-else>
+                                    <button class="rounded border-0"
+                                        :class="message.status === 'received' ? 'received' : '' ">
+                                        <span class="text-message">{{ message.message }}</span>
+
+                                        <span class="hour-message">{{message.hour}} </span>
+
+                                    </button>
+                                </div>
+
+                                <!-- inserisco evento di invio al form per l'invio di un nuovo messaggio -->
+                                <div @submit.prevent="addElement()"
+                                    class="form-group position-absolute start-0 bottom-0 w-100">
+                                    <div class="input-group align-items-center border my-style-input p-2">
+
+                                        <label class="active px-4 " for="input-group-2">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </label>
+
+                                        <input 
+                                            v-model="newElement" 
+                                            type="text"
+                                            class="form-control border-0 border-start rounded" 
+                                            id="input-group-2"
+                                            name="input-group-2" 
+                                            placeholder="Scrivi un messaggio"
+                                            @keydown.enter.prevent="addElement">
+
+                                        <i class="fa-solid fa-microphone px-4"></i>
+                                    </div>
+                                </div>
+
                             </div>
+                            <!--fine ciclo for per stampare le chat -->
+
                         </div>
-                        
                     </div>
+                    <!-- fine contenuto per le chat -->
+
+
                 </div>
+                <!-- Fine colonna con visualizzazione chat -->
             </div>
-            
         </div>
+
+
     </div>
-</div>
-
-
-</div>
 
 
 

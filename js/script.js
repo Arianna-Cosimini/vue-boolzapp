@@ -5,7 +5,7 @@ createApp({
         return {
 
             activeMessageIndex: 0,
-            newElement:"",
+            newElement: "",
 
             contacts: [
                 {
@@ -191,7 +191,7 @@ createApp({
                     ],
                 }
             ]
-            
+
         }
 
 
@@ -199,34 +199,50 @@ createApp({
 
 
     methods: {
-
+        // metodo per far apparire la conversazione se digito sulla chat
         changeMessage(index) {
             console.log(index)
             this.activeMessageIndex = index
         },
 
+        // metodo per aggiungere il messaggio dal campo di input
         addElement() {
+            let now = new Date()
+            let hour = now.getHours()
+            let minutes = now.getMinutes()
+
+            
             // Controllo per verificare se il campo di input è vuoto
             if (this.newElement.trim() === "") {
                 return;
             }
-        
-            // Aggiungi il testo scritto nel campo di input al messaggio del contatto attivo
-            if (this.activeMessageIndex !== null) { // Controlla se è stato selezionato un contatto
 
-                let now = new Date()
-                let hour = now.getHours()
-                let minutes = now.getMinutes()
+            // Aggiungo il testo scritto nel campo di input al messaggio del contatto attivo
+            if (this.activeMessageIndex !== null) { // Controllo se è stato selezionato un contatto
 
+                // inserisco nell'array il messaggio con status sent
                 this.contacts[this.activeMessageIndex].messages.push({
                     message: this.newElement,
                     status: 'sent',
                     hour: `${hour}:${minutes}`,
                 });
+
+
             }
-        
+
             // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
             this.newElement = "";
+
+            // faccio apparire dopo un secondo un messaggio di risposta con status received
+            setTimeout(() => {
+
+                this.contacts[this.activeMessageIndex].messages.push({
+                    message: 'ok',
+                    status: 'received',
+                    hour: `${hour}:${minutes}`,
+                });
+            }, 1000)
+
         },
     }
 }).mount('#app');
