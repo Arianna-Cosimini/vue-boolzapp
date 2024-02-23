@@ -244,6 +244,7 @@ createApp({
                     message: this.newElement,
                     status: 'sent',
                     hour: `${hour}:${minutes}`,
+                    date: `${now}`,
                 });
 
 
