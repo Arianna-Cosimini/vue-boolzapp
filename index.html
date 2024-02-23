@@ -24,10 +24,10 @@
 <body>
 
     <div id="app">
-       
-        
+
+
         <div class="large-container">
-            
+
             <div id="top-bar"></div>
 
             <div class="small-container d-flex">
@@ -89,13 +89,13 @@
 
 
                     <!-- Ciclo for per stampare la lista dei messaggi ricevuti -->
-                    <div v-for="(currentName,index) in filteredContacts" id="user-message"
+                    <div   v-for="(currentName,index) in filteredContacts" id="user-message"
                         class="d-flex justify-content-between px-3 py-1 border-top" @click="changeMessage(index)">
                         <div class="img-user d-flex gap-3">
                             <img class="user-picture" :src="currentName.avatar" alt="">
                             <div id="text-user" class="d-flex flex-column">
                                 <span class="name">{{currentName.name}} </span>
-                                <span class="last-send">Ultimo messaggio inviato</span>
+                                <span class="last-send"></span>
                             </div>
                         </div>
                         <div id="date">
@@ -112,6 +112,8 @@
                             </div>
 
                         </div>
+
+                    
 
                     </div>
                     <!-- Fine ciclo for per stampare la lista dei messaggi ricevuti -->
@@ -153,34 +155,34 @@
                         <!-- controllo per assicurarmi che la chat sia presente -->
                         <div v-if="activeMessageIndex !== null" class="message-list">
                             <!-- ciclo for per stampare le chat -->
-                            <div v-for="message in contacts[activeMessageIndex].messages" class="message">
+                            <div v-for="(message , index) in contacts[activeMessageIndex].messages" class="message">
 
                                 <!-- condizione per stampare i messaggi con status sent (inviati)
                                 se lo status è sent allora stampo i messaggi con quello status -->
                                 <div v-if="message.status === 'sent' " class="d-flex justify-content-end">
 
                                     <div class="dropdown">
-                                        <button class="rounded border-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="message.status === 'sent' ? 'sent' : '' ">
+                                        <button class="rounded border-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"
+                                            :class="message.status === 'sent' ? 'sent' : '' ">
                                             <span class="text-message">{{ message.message }}</span>
 
                                             <span class="hour-message">{{message.hour}} </span>
                                         </button>
                                         <ul class="dropdown-menu">
-                                          <li><a class="dropdown-item" href="#">Action</a></li>
-                                          <li><a class="dropdown-item" href="#">Another action</a></li>
-                                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            <li><a @click="deleteMessage(index)" class="dropdown-item" href="#" >Cancella messaggio</a></li>
                                         </ul>
-                                      </div>
-                                     
-                                        <!-- <button class=" rounded border-0" 
+                                    </div>
+
+                                    <!-- <button class=" rounded border-0" 
                                             :class="message.status === 'sent' ? 'sent' : '' ">
                                             <span class="text-message">{{ message.message }}</span>
 
                                             <span class="hour-message">{{message.hour}} </span>
 
                                         </button> -->
-                                        
-                                   
+
+
                                 </div>
                                 <!--fine condizione per stampare i messaggi con status sent (inviati) -->
 

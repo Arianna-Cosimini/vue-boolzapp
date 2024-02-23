@@ -276,7 +276,13 @@ createApp({
           filterWords() {
             this.filterContacts = this.contacts.filter(this.researchWords);
           },
-          
+
+        //   metodo per eliminare i messaggi tramite il dropdown menu
+          deleteMessage(messageIndex) {
+           
+                this.contacts[this.activeMessageIndex].messages.splice(messageIndex, 1);
+            
+        }
           
     }
 }).mount('#app');
