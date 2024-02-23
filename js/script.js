@@ -6,6 +6,8 @@ createApp({
 
             activeMessageIndex: 0,
             newElement: "",
+            searchWord:"",
+            filterContacts: [],
 
             contacts: [
                 {
@@ -197,6 +199,23 @@ createApp({
 
     },
 
+    /*definisco la proprietà calcolata in questo modo ogni volta che la parola inserita
+    dall'utente cambia la proprietà filteredContacts viene ricalcolata ottenendo cosi i nomi
+    filtrati in base alle parole scritte dall'utente
+    
+    */
+    computed: {
+        filteredContacts() {
+          if (this.searchWord === "") {
+            return this.contacts;
+          } else {
+            return this.contacts.filter(contact =>
+              contact.name.toLowerCase().includes(this.searchWord.toLowerCase())
+            );
+          }
+        },
+      },
+
 
     methods: {
         // metodo per far apparire la conversazione se digito sulla chat
@@ -244,5 +263,20 @@ createApp({
             }, 1000)
 
         },
+
+        // filtro i nomi nei contatti 
+        researchWords(word) {
+            return this.contacts.filter(contact =>
+              contact.name.toLowerCase().includes(word.toLowerCase())
+            );
+          },
+
+        //   inseisco i nomi filtrati nell'array filterContacts
+
+          filterWords() {
+            this.filterContacts = this.contacts.filter(this.researchWords);
+          },
+          
+          
     }
 }).mount('#app');

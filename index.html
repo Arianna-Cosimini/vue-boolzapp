@@ -76,15 +76,25 @@
                         <div class="input-group align-items-center border">
                             <label class="active px-4 " for="input-group-2"><i
                                     class="fa-solid fa-magnifying-glass"></i></label>
-                            <input type="text" class="form-control border-0 border-start" id="input-group-2"
-                                name="input-group-2" placeholder="Cerca o inizia una nuova chat">
+                            
+                            <!-- Inserito evento di input per richiamare la funzione
+                            filterWords -->
+                            <input 
+                                @input="filterWords()" 
+                                v-model="searchWord"
+                                type="text" 
+                                class="form-control border-0 border-start" 
+                                id="input-group-2"
+                                name="input-group-2" 
+                                placeholder="Cerca o inizia una nuova chat"
+                            >
                         </div>
                     </div>
                     <!-- Fine input cerca o inizia nuova chat -->
 
 
                     <!-- Ciclo for per stampare la lista dei messaggi ricevuti -->
-                    <div v-for="(currentName,index) in contacts" id="user-message"
+                    <div v-for="(currentName,index) in filteredContacts" id="user-message"
                         class="d-flex justify-content-between px-3 py-1 border-top" @click="changeMessage(index)">
                         <div class="img-user d-flex gap-3">
                             <img class="user-picture" :src="currentName.avatar" alt="">
