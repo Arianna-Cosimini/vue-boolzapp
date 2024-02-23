@@ -189,13 +189,18 @@
 
                                 <!-- altrimenti stampo i messaggi con status received (ricevuti) -->
                                 <div v-else>
-                                    <button class="rounded border-0"
-                                        :class="message.status === 'received' ? 'received' : '' ">
-                                        <span class="text-message">{{ message.message }}</span>
+                                    <div class="dropdown">
+                                        <button class="rounded border-0" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false"
+                                            :class="message.status === 'received' ? 'received' : '' ">
+                                            <span class="text-message">{{ message.message }}</span>
 
-                                        <span class="hour-message">{{message.hour}} </span>
-
-                                    </button>
+                                            <span class="hour-message">{{message.hour}} </span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a @click="deleteMessage(index)" class="dropdown-item" href="#" >Cancella messaggio</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                                 <!-- inserisco evento di invio al form per l'invio di un nuovo messaggio -->
