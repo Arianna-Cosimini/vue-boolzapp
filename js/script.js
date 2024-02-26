@@ -336,7 +336,15 @@ createApp({
 
             this.contacts[this.activeMessageIndex].messages.splice(messageIndex, 1);
 
-        }
+        },
+
+        deleteMessageAll(){
+            this.contacts[this.activeMessageIndex].messages.splice(2)
+        },
+
+        deleteElement(chat){
+            this.contacts.splice(chat,1)
+        },
 
     }
 }).mount('#app');

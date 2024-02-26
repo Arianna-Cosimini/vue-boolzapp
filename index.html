@@ -148,7 +148,15 @@
                         <div id="icon-user-received" class="d-flex gap-3 me-2">
                             <i class="fa-solid fa-magnifying-glass"></i>
                             <i class="fa-solid fa-paperclip"></i>
-                            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+                            <div class="dropdown">
+                                <i class="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+
+                                <ul class="dropdown-menu">
+                                    <li><a @click="deleteElement(index)" class="dropdown-item" href="#">Cancella
+                                            chat</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <!-- fine topbar per colonna con visualizzazione chat -->
@@ -222,7 +230,8 @@
                                             name="input-group-2" placeholder="Scrivi un messaggio"
                                             @keydown.enter.prevent="addElement">
 
-                                        <i @click="addElement()" :class="newElement ? 'fa-solid fa-paper-plane px-4' : 'fa-solid fa-microphone px-4' "></i>
+                                        <i @click="addElement()"
+                                            :class="newElement ? 'fa-solid fa-paper-plane px-4' : 'fa-solid fa-microphone px-4' "></i>
                                     </div>
                                 </div>
 
