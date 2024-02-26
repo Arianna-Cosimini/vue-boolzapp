@@ -6,7 +6,7 @@ createApp({
 
             activeMessageIndex: 0,
             newElement: "",
-            searchWord:"",
+            searchWord: "",
             filterContacts: [],
 
             contacts: [
@@ -206,15 +206,15 @@ createApp({
     */
     computed: {
         filteredContacts() {
-          if (this.searchWord === "") {
-            return this.contacts;
-          } else {
-            return this.contacts.filter(contact =>
-              contact.name.toLowerCase().includes(this.searchWord.toLowerCase())
-            );
-          }
+            if (this.searchWord === "") {
+                return this.contacts;
+            } else {
+                return this.contacts.filter(contact =>
+                    contact.name.toLowerCase().includes(this.searchWord.toLowerCase())
+                );
+            }
         },
-      },
+    },
 
 
     methods: {
@@ -230,41 +230,51 @@ createApp({
             let hour = now.getHours()
             let minutes = now.getMinutes()
 
+
+            let day = now.getDate();
+            let month = now.getMonth() + 1;
+            let year = now.getFullYear();
+
+            
+
+            
+
+
             // array con risposte per metodo random
             let things = [
 
-                "CI SONO MOMENTI IN CUI TUTTO VA BENE: NON TI SPAVENTARE, NON DURA", 
-                "Il mio oroscopo di oggi è stato chiaro: lascia stare, se cambia qualcosa mi faccio sentire io.", 
+                "CI SONO MOMENTI IN CUI TUTTO VA BENE: NON TI SPAVENTARE, NON DURA",
+                "Il mio oroscopo di oggi è stato chiaro: lascia stare, se cambia qualcosa mi faccio sentire io.",
                 "Anche stamattina ho trasformato l’acqua in caffè, ma resto umile",
                 "Giuro solennemente di non avere buone intenzioni",
                 "Arrivo tra 10 minuti. Se non mi vedi arrivare rileggi il messaggio.",
                 "La vita è come una scatola di cioccolatini, non sai mai quello che ti capita!",
                 "Qualche sciocchezza di tanto in tanto aiuta l'uomo a vivere d'incanto",
-            
-            ];
-            
-            // associato variabile ad array con  metodo random
-            let thing = things[Math.floor(Math.random()*things.length)];
 
-            
+            ];
+
+            // associato variabile ad array con  metodo random
+            let thing = things[Math.floor(Math.random() * things.length)];
+
+
             // Controllo per verificare se il campo di input è vuoto
             if (this.newElement.trim() === "") {
                 return;
             }
 
             // Aggiungo il testo scritto nel campo di input al messaggio del contatto attivo
-            if (this.activeMessageIndex !== null) { // Controllo se è stato selezionato un contatto
+            if (this.activeMessageIndex !== null ) { // Controllo se è stato selezionato un contatto
 
                 // inserisco nell'array il messaggio con status sent
                 this.contacts[this.activeMessageIndex].messages.push({
                     message: this.newElement,
                     status: 'sent',
                     hour: `${hour}:${minutes}`,
-                    date: `${now}`,
+                    // date: `${day}/${month}/${year}`,
                 });
 
-
-            }
+              
+            }else if (now )
 
             // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
             this.newElement = "";
@@ -276,6 +286,8 @@ createApp({
                     message: `${thing}`,
                     status: 'received',
                     hour: `${hour}:${minutes}`,
+                    // date: `${day}/${month}/${year}`,
+
                 });
             }, 1000)
 
@@ -284,22 +296,22 @@ createApp({
         // filtro i nomi nei contatti 
         researchWords(word) {
             return this.contacts.filter(contact =>
-              contact.name.toLowerCase().includes(word.toLowerCase())
+                contact.name.toLowerCase().includes(word.toLowerCase())
             );
-          },
+        },
 
         //   inseisco i nomi filtrati nell'array filterContacts
 
-          filterWords() {
+        filterWords() {
             this.filterContacts = this.contacts.filter(this.researchWords);
-          },
+        },
 
         //   metodo per eliminare i messaggi tramite il dropdown menu
-          deleteMessage(messageIndex) {
-           
-                this.contacts[this.activeMessageIndex].messages.splice(messageIndex, 1);
-            
+        deleteMessage(messageIndex) {
+
+            this.contacts[this.activeMessageIndex].messages.splice(messageIndex, 1);
+
         }
-          
+
     }
 }).mount('#app');

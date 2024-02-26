@@ -96,7 +96,8 @@ body{
 .sent{
     position: relative;
     background-color: green;
-    padding: 4px 100px 4px 8px;
+    max-width: 300px;
+    padding: 5px 10px;
     margin-bottom: 8px;
 }
 /* fine stile btn messaggi inviati */
@@ -105,7 +106,8 @@ body{
 
 .received{
     position: relative;
-    padding: 4px 100px 4px 8px;
+    max-width: 300px;
+    padding: 5px 10px;
     margin-bottom: 8px;
 }
 /* fine stile btn messaggi ricevuti */
@@ -126,6 +128,12 @@ body{
 }
 /* stile contenuto btn */
 
+
+#last-access{
+    color: #c2c5c6;
+    font-size: 12px;
+    font-weight:500;
+}
 
 
 
