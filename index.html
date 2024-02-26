@@ -140,9 +140,7 @@
                             </div>
 
                             <span id="last-access" v-if="contacts[activeMessageIndex].messages.length > 0">
-                                Ultimo accesso: {{
-                                contacts[activeMessageIndex].messages[contacts[activeMessageIndex].messages.length -
-                                1].hour }}
+                                {{userStatus}}
                             </span>
 
                         </div>

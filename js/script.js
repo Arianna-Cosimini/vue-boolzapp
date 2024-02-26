@@ -3,11 +3,20 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-
+            // tengo traccia delle chat attive
             activeMessageIndex: 0,
+
+            // tiene traccia del messaggio inserito nell'input dell'invio
             newElement: "",
+
+            // tengo traccia delle lettere inserite nell'input per ricercare l nome di un utente
             searchWord: "",
+
+            // array inizializzato vuoto per inserire le parole corrispondenti alla ricerca dell'utente nella chat
             filterContacts: [],
+
+            // inizializzo stringa vuota per cambiare lo stato della chat durante la conversazione
+            userStatus: "", 
 
             contacts: [
                 {
@@ -231,13 +240,13 @@ createApp({
             let minutes = now.getMinutes()
 
 
-            let day = now.getDate();
-            let month = now.getMonth() + 1;
-            let year = now.getFullYear();
+            // let day = now.getDate();
+            // let month = now.getMonth() + 1;
+            // let year = now.getFullYear();
 
-            
 
-            
+
+
 
 
             // array con risposte per metodo random
@@ -262,8 +271,22 @@ createApp({
                 return;
             }
 
+            
+            // lo stato della chat mentre l'utente scrive
+            this.userStatus = 'Sta scrivendo...'
+           
+            // dopo due secondi faccio apparire la scritta online
+            setTimeout(() => {
+                this.userStatus = "online"
+            }, 2000)
+
+            // dopo 4 secondi faccio apparire l'ultimo accesso con data e ora
+            setTimeout(() =>{
+                this.userStatus = `Ultimo accesso: ${hour}:${minutes}`
+            },4000)
+
             // Aggiungo il testo scritto nel campo di input al messaggio del contatto attivo
-            if (this.activeMessageIndex !== null ) { // Controllo se è stato selezionato un contatto
+            if (this.activeMessageIndex !== null) { // Controllo se è stato selezionato un contatto
 
                 // inserisco nell'array il messaggio con status sent
                 this.contacts[this.activeMessageIndex].messages.push({
@@ -273,14 +296,16 @@ createApp({
                     // date: `${day}/${month}/${year}`,
                 });
 
-              
-            }else if (now )
 
-            // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
-            this.newElement = "";
+            }
+
+                // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
+                this.newElement = "";
 
             // faccio apparire dopo un secondo un messaggio di risposta con status received
             setTimeout(() => {
+
+
 
                 this.contacts[this.activeMessageIndex].messages.push({
                     message: `${thing}`,
