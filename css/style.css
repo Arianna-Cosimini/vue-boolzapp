@@ -38,6 +38,10 @@ body{
     margin-top: -120px;
 }
 
+.small-column{
+    width: 50%;
+}
+
  /* Inizio div attivare notifiche */
 
 #new-messages{
@@ -90,6 +94,7 @@ body{
 
 .large-column{
     background-image:url("../img/mine.jpg");
+    width: 75%;
 }
 
 /* stile btn messaggi inviati */
@@ -134,6 +139,9 @@ body{
     font-size: 12px;
     font-weight:500;
 }
+
+
+
 
 
 

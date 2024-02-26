@@ -1,3 +1,8 @@
+
+
+const { DateTime } = luxon;
+
+
 const { createApp } = Vue
 
 createApp({
@@ -16,7 +21,10 @@ createApp({
             filterContacts: [],
 
             // inizializzo stringa vuota per cambiare lo stato della chat durante la conversazione
-            userStatus: "", 
+            userStatus: "",
+           
+
+
 
             contacts: [
                 {
@@ -226,7 +234,19 @@ createApp({
     },
 
 
+
+    mounted() {
+        // Verifica se lo schermo è di dimensioni ridotte (mobile)
+        this.checkIfMobile();
+        // Aggiungi un listener per controllare la ridimensione della finestra
+        window.addEventListener('resize', this.checkIfMobile);
+    },
+
+
     methods: {
+
+
+
         // metodo per far apparire la conversazione se digito sulla chat
         changeMessage(index) {
             console.log(index)
@@ -271,19 +291,19 @@ createApp({
                 return;
             }
 
-            
+
             // lo stato della chat mentre l'utente scrive
             this.userStatus = 'Sta scrivendo...'
-           
+
             // dopo due secondi faccio apparire la scritta online
             setTimeout(() => {
                 this.userStatus = "online"
             }, 2000)
 
             // dopo 4 secondi faccio apparire l'ultimo accesso con data e ora
-            setTimeout(() =>{
+            setTimeout(() => {
                 this.userStatus = `Ultimo accesso: ${hour}:${minutes}`
-            },4000)
+            }, 4000)
 
             // Aggiungo il testo scritto nel campo di input al messaggio del contatto attivo
             if (this.activeMessageIndex !== null) { // Controllo se è stato selezionato un contatto
@@ -299,8 +319,8 @@ createApp({
 
             }
 
-                // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
-                this.newElement = "";
+            // Cancella il contenuto del campo di input dopo l'aggiunta del messaggio
+            this.newElement = "";
 
             // faccio apparire dopo un secondo un messaggio di risposta con status received
             setTimeout(() => {
@@ -339,14 +359,38 @@ createApp({
         },
 
         // metodo per eliminare tutti i messaggi in una conversazione. 
-        deleteMessageAll(){
-            this.contacts[this.activeMessageIndex].messages=[]
+        deleteMessageAll() {
+            this.contacts[this.activeMessageIndex].messages = []
         },
 
         // metodo per eliminare la chat
-        deleteElement(chat){
-            this.contacts.splice(chat,1)
+        deleteElement(chat) {
+            this.contacts.splice(chat, 1)
         },
+
+        checkIfMobile() {
+            // Imposta isMobile in base alla larghezza dello schermo
+            this.isMobile = window.innerWidth <= 576; 
+        }
+
+        // // Funzione per formattare la data
+        // formatDate(dateString) {
+        //     const date = DateTime.fromISO(dateString);
+        //     const today = DateTime.local().startOf('day');
+        //     const yesterday = DateTime.local().minus({ days: 1 }).startOf('day');
+
+        //     if (date >= today) {
+        //         // Se la data è oggi, restituisci l'orario
+        //         return date.toLocaleString(DateTime.TIME_SIMPLE);
+        //     } else if (date >= yesterday) {
+        //         // Se la data è ieri, restituisci 'ieri'
+        //         return 'ieri';
+        //     } else {
+        //         // Altrimenti, restituisci la data completa
+        //         return date.toLocaleString(DateTime.DATE_MED);
+        //     }
+        // },
+
 
     }
 }).mount('#app');
