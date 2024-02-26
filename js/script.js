@@ -338,10 +338,12 @@ createApp({
 
         },
 
+        // metodo per eliminare tutti i messaggi in una conversazione. 
         deleteMessageAll(){
-            this.contacts[this.activeMessageIndex].messages.splice(2)
+            this.contacts[this.activeMessageIndex].messages=[]
         },
 
+        // metodo per eliminare la chat
         deleteElement(chat){
             this.contacts.splice(chat,1)
         },

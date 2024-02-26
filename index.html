@@ -150,11 +150,16 @@
                             <i class="fa-solid fa-paperclip"></i>
 
                             <div class="dropdown">
-                                <i class="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                                <i class="fa-solid fa-ellipsis-vertical" data-bs-toggle="dropdown"
+                                    aria-expanded="false"></i>
 
                                 <ul class="dropdown-menu">
+                                    <li><a @click="deleteMessageAll()" class="dropdown-item" href="#">Cancella
+                                            messaggi</a></li>
                                     <li><a @click="deleteElement(index)" class="dropdown-item" href="#">Cancella
                                             chat</a></li>
+
+
                                 </ul>
                             </div>
                         </div>
