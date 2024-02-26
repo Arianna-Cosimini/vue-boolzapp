@@ -222,7 +222,7 @@
                                             name="input-group-2" placeholder="Scrivi un messaggio"
                                             @keydown.enter.prevent="addElement">
 
-                                        <i class="fa-solid fa-microphone px-4"></i>
+                                        <i @click="addElement()" :class="newElement ? 'fa-solid fa-paper-plane px-4' : 'fa-solid fa-microphone px-4' "></i>
                                     </div>
                                 </div>
 
